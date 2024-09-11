@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Online Quiz System</h1>
+  <div id="quiz-container">
+    <div id="timer">Time Left: 30s</div>
+    <div id="quiz-question"></div>
+    <div id="quiz-options"></div>
+    <button id="next-btn">Next</button>
+    <div id="score"></div>
+  </div>  
+  <div id="profile">
+    <h3>Welcome, <span id="profile-name"></span>!</h3>
+    <p>Email: <span id="profile-email"></span></p>
+  </div>
+  <div id="quiz-container">
+    <div id="quiz-question"></div>
+    <div id="quiz-options"></div>
+    <button id="next-btn">Next</button>
+    <div id="score"></div>
+  </div>
+  <div id="difficulty-selection">
+    <h3>Select Difficulty</h3>
+    <button onclick="startQuiz('easy')">Easy</button>
+    <button onclick="startQuiz('medium')">Medium</button>
+    <button onclick="startQuiz('hard')">Hard</button>
+  </div>
+  <script src="quiz.js"></script>
+  <script>
+    fetch('/auth/profile', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => res.json())
+    .then(profile => {
+      document.getElementById('profile-name').innerText = profile.name;
+      document.getElementById('profile-email').innerText = profile.email;
+    });
+  </script>
+  <script>
+    fetch('/auth/score-history', {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(res => res.json())
+    .then(history => {
+      const historyList = document.getElementById('history-list');
+      history.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = `Quiz: ${item.quizId}, Score: ${item.score}, Date: ${new Date(item.date).toLocaleDateString()}`;
+        historyList.appendChild(li);
+      });
+    });
+  </script>
+  <script>
+    function startQuiz(difficulty) {
+      fetch(`/api/questions?difficulty=${difficulty}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      })
+      .then(res => res.json())
+      .then(quizData => {
+        // Start quiz with the selected difficulty
+        loadQuiz(quizData);
+      });
+    }
+  </script>
+</body>
+</html>
