@@ -71,3 +71,38 @@ online-quiz-system/
    ```
     npm start
    ```
+
+4. **Access the Application** :
+
+   Open your browser and navigate to ```http://localhost:3000```.
+
+## API Endpoints
+
+- **POST /register**: Register a new user.
+
+- **POST /login**: Login and receive a JWT token.
+
+- **GET /api/questions**: Fetch quiz questions (requires authentication).
+
+- **POST /api/submit**: Submit quiz answers and record scores (requires authentication).
+
+- **GET /profile**: Get user profile information (requires authentication).
+
+## Result (Screenshot)
+
+Note: This is Just basic that I have made and i didn't updated the design, if you have any suggestions or any improvements, feel free to contribute
+
+![image](https://github.com/user-attachments/assets/56ab52ac-3bb6-4736-bbd6-dcc79ff5f7a5)
+
+## Contributing
+
+Feel free to contribute to the project by opening issues or submitting pull requests. Ensure that your code follows the project's style guidelines and passes all tests.
+
+## License
+
+This project is licensed under the MIT License.
+
+## Contact
+
+For questions or feedback, please contact ```vivekvardhan43862@gmail.com``` (or) ```vivekvardhan23862@gmail.com```.
+
