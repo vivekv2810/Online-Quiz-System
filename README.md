@@ -65,3 +65,9 @@ online-quiz-system/
    ```
     npx tsc
    ```
+ 
+ - To start the server:
+
+   ```
+    npm start
+   ```
